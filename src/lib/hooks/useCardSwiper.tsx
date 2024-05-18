@@ -18,7 +18,6 @@ interface UseCardSwiper extends CardEvents {
 export const useCardSwiper = ({ onDismiss, onFinish, onEnter, data }: UseCardSwiper) => {
   const swiperElements = useRef<Swiper[]>([])
   const [swiperIndex, setSwiperIndex] = useState(data.length)
-  const [dynamicData, setDynamicData] = useState(data)
   const [isFinish, setIsFinish] = useState(false)
 
   const handleNewCardSwiper = (ref: HTMLDivElement | null, id: CardId, meta: CardMetaData) => {
@@ -60,11 +59,9 @@ export const useCardSwiper = ({ onDismiss, onFinish, onEnter, data }: UseCardSwi
 
   return {
     isFinish,
-    dynamicData,
     swiperIndex,
     swiperElements,
     handleEnter,
-    setDynamicData,
     handleClickEvents,
     handleNewCardSwiper,
   }

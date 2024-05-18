@@ -12,13 +12,12 @@ import { CardSwiperRightActionButton } from './CardSwiperRightActionButton'
 
 export const CardSwiper = (props: CardSwiperProps) => {
   const { data, likeButton, dislikeButton, withActionButtons = false, emptyState, onDismiss, onFinish, onEnter } = props
-  const { handleEnter, handleClickEvents, handleNewCardSwiper, dynamicData, isFinish, swiperIndex, swiperElements } =
-    useCardSwiper({
-      onDismiss,
-      onFinish,
-      onEnter,
-      data,
-    })
+  const { handleEnter, handleClickEvents, handleNewCardSwiper, isFinish, swiperIndex, swiperElements } = useCardSwiper({
+    onDismiss,
+    onFinish,
+    onEnter,
+    data,
+  })
   const [currentSwiper, setCurrentSwiper] = useState<Swiper | undefined>(swiperElements.current[swiperIndex])
   const [hideActionButtons, setHideActionButtons] = useState('')
 
@@ -32,7 +31,7 @@ export const CardSwiper = (props: CardSwiperProps) => {
 
   const CardComponents = useMemo(
     () =>
-      dynamicData.map(({ id, header, src, content, meta }) => (
+      data.map(({ id, header, src, content, meta }) => (
         <div
           key={id}
           ref={(ref) => handleNewCardSwiper(ref, id, meta)}
@@ -58,7 +57,7 @@ export const CardSwiper = (props: CardSwiperProps) => {
           {content && <div className="swipe-card__content">{content}</div>}
         </div>
       )),
-    [],
+    [data],
   )
 
   useEffect(() => {
